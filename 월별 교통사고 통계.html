@@ -1,15 +1,14 @@
 <html>
    <head>
-      <title>월별교통사고통계</title>
-      <script type = "text/javascript" src = "https://www.gstatic.com/charts/loader.js">
-      </script>
-
+      <title></title>
+      <script type = "text/javascript" src = "https://www.gstatic.com/charts/loader.js"></script>
       <script type = "text/javascript">
          google.charts.load('current', {packages: ['corechart']});
       </script>
    </head>
+
    <body>
-      <div id = "month" style = "width: 1000px; height: 1500px; margin: 0 auto">
+      <div id = 'month' style = "width: 1000px; height: 1400px; margin: 0 auto">
       <script language = "JavaScript">
          function drawChart() {
             var data = google.visualization.arrayToDataTable([
@@ -25,11 +24,11 @@
               ['11월',19750.0,508.0,8931.0,19709.0,1414.0],
               ['12월',17748.0,423.0,7978.0,19094.0,1242.0],
               ['01월',16818.0,418.0,7811.0,17526.0,944.0],
-              ['02월',16656.0,393.0,7644.0,17287.0,1067.0],
+              ['02월',16656.0,393.0,7644.0,17287.0,1067.0]
             ]);
             var options = {title: '월별교통사고통계'};
             // Instantiate and draw the chart.
-            var chart = new google.visualization.BarChart(document.getElementById('container'));
+            var chart = new google.visualization.BarChart(document.getElementById('month'));
             chart.draw(data, options);
          }
          google.charts.setOnLoadCallback(drawChart);
