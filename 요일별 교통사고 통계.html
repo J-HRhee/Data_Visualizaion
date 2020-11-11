@@ -1,0 +1,33 @@
+<html>
+   <head>
+      <title></title>
+      <script type = "text/javascript" src = "https://www.gstatic.com/charts/loader.js"></script>
+      <script type = "text/javascript">
+         google.charts.load('current', {packages: ['corechart']});
+      </script>
+   </head>
+
+   <body>
+      <div id = "day" style = "width: 1000px; height: 1000px; margin: 0 auto">
+      <script language = "JavaScript">
+         function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['요일','사고건수','사망자수','중상자수','경상자수','부상신고자수'],
+              ['월',31688.0,779.0,14365.0,30930.0,2075.0],
+              ['화',31637.0,779.0,14166.0,30526.0,2110.0],
+              ['수',31277.0,727.0,14050.0,30206.0,2063.0],
+              ['목',31843.0,769.0,14322.0,30636.0,2080.0],
+              ['금',35321.0,796.0,15796.0,35160.0,2274.0],
+              ['토',34208.0,844.0,15730.0,37698.0,2501.0],
+              ['일',27682.0,698.0,13274.0,32434.0,2169.0],
+            ]);
+            var options = {title: '요일별교통사고통계'};
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.BarChart(document.getElementById('day'));
+            chart.draw(data, options);
+         }
+         google.charts.setOnLoadCallback(drawChart);
+      </script>
+      </div>
+    </body>
+</html>
