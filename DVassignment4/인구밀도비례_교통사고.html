@@ -1,0 +1,64 @@
+<html>
+<head>
+  <h1>인구밀도를 고려한 상대적 인명피해수</h1>
+  <h4>인구밀도와 반비례함을 시각적으로 확인할 수 있다.</h4>
+<script type='text/javascript' src='http://www.google.com/jsapi'></script>
+<script type='text/javascript'>google.load('visualization', '1', {'packages': ['geochart']});
+google.setOnLoadCallback(drawVisualization);
+
+function drawVisualization() {
+  var data1 = new google.visualization.arrayToDataTable([
+    ['City','인구밀도비례 교통사고'],
+    ['KR-11', 0.026724713672259894],
+    ['KR-26', 0.049405491762121355],
+    ['KR-27', 0.09991704380590313],
+    ['KR-28', 0.0932128760706579],
+    ['KR-29', 0.02723961695643616],
+    ['KR-30', 0.0489385072869451],
+    ['KR-31', 0.08674481657431488],
+    ['KR-50', 0.022520918386243007],
+    ['KR-41', 1.1487583219128374],
+    ['KR-42', 4.223818875678088],
+    ['KR-43', 1.8437748186169487],
+    ['KR-44', 2.25096175295836],
+    ['KR-45', 2.0195543919859884],
+    ['KR-46', 4.1353880735729565],
+    ['KR-47', 5.364327024812455],
+    ['KR-48', 1.8129842639367648],
+    ['KR-49', 0.3460479865084337],
+  ]);
+  var options = {
+    backgroundColor: {fill:'#FFFFFF',stroke:'#FFFFFF' ,strokeWidth:0 },
+    colorAxis:  {minValue: 0.02, maxValue: 5.4, colors: ['rgb(1,155,200)']},
+    legend: 'none',
+    backgroundColor: {fill:'#FFFFFF',stroke:'#FFFFFF' ,strokeWidth:0 },
+    datalessRegionColor: '#f5f5f5',
+    displayMode: 'regions',
+    enableRegionInteractivity: 'true',
+    resolution: 'provinces',
+    sizeAxis: {minValue: 1, maxValue:1,minSize:10,  maxSize: 10},
+    region:'KR', //country code
+    keepAspectRatio: true, width:600,	height:400,
+    tooltip: {textStyle: {color: '#444444'}, trigger:'focus'}
+  };
+
+  var chart1 = new google.visualization.GeoChart(document.getElementById('visualization'));
+  google.visualization.events.addListener(chart1, 'select', function() {
+    var selection = chart1.getSelection();
+    if (selection.length == 1) {
+      var selectedRow = selection[0].row;
+      var selectedRegion = data1.getValue(selectedRow, 0);
+      if(ivalue[selectedRegion] != '') {
+        document.getElementsByTagName('body')[0].style.background=ivalue[selectedRegion];
+      }
+    }
+  });
+  chart1.draw(data1, options);
+}
+
+</script>
+</head>
+<body>
+<div id='visualization'> </div>
+</body>
+</html>
