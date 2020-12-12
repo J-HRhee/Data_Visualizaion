@@ -1,0 +1,293 @@
+<html>
+  <head>
+    <script type='text/javascript' src='http://www.google.com/jsapi'></script>
+    <style type="text/css"></style>
+  </head>
+  <body style="margin: 20px;">
+    <h1>가설4: 인구밀도가 높은 지역일수록 사망사고의 발생확률이 높을 것이다.</h1>
+    <p>사용데이터</p>
+    <p> - 도로교통공단_사망 교통사고 정보_20201123.csv (Raw Data)</p>
+    <p> - 행정구역_시군구_별_인구수_20201128225046.csv (Statistical Data)</p>
+    <p> - 한국지역코드.CSV</p>
+    <p> - 지역별_면적_20201129011159.csv</p>
+    <!--<div id="population" style="width: 900px; height: 500px;">
+      <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+              var data1 = google.visualization.arrayToDataTable([
+                ['지역', '인구'],
+                ['서울_인천_경기', 26032007],
+                ['부산_울산_경남', 7879010],
+                ['대구_경북', 5063934],
+                ['대전_충남', 3587903],
+                ['충북_' ,1599102],
+                ['광주_전남', 3303674],
+                ['전북_', 1805937],
+                ['강원_', 1541836],
+                ['제주_', 673606],
+                ['세종_', 351007],
+              ]);
+              var options1 = {title: '지역별 인구수'};
+              var chart1 = new google.visualization.PieChart(document.getElementById('population'));
+              chart1.draw(data1, options1);
+            }
+      </script>
+    </div>
+    <div id="piechart" style="width: 900px; height: 500px;">
+      <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+              var data = google.visualization.arrayToDataTable([
+              ['지역', '부상자수'],
+              ['서울_인천_경기', 973],
+              ['부산_울산_경남', 457],
+              ['대구_경북', 449],
+              ['대전_충남', 373],
+              ['충북_' ,178],
+              ['광주_전남', 326],
+              ['전북_', 228],
+              ['강원_', 172],
+              ['제주_', 64],
+              ['세종_', 13],
+            ]);
+              var options = {title: '지역별 교통사고 사망사건 발생 횟수'};
+              var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+              chart.draw(data, options);
+          }
+      </script>
+    </div>-->
+
+    <div style="float:left; margin: 10px;">
+    <h2>인구밀도</h2>
+      <div id='density'>
+        <script type='text/javascript'>google.load('visualization', '1', {'packages': ['geochart']});
+          google.setOnLoadCallback(drawVisualization);
+          function drawVisualization() {
+            var data1 = new google.visualization.arrayToDataTable([
+              ['City','Populaion density'],
+              ['KR-11', 16015.138842975206],
+              ['KR-26', 4412.464935064935],
+              ['KR-27', 2742.274886877828],
+              ['KR-28', 2767.8579492003764],
+              ['KR-29', 2900.187624750499],
+              ['KR-30', 2717.696296296296],
+              ['KR-31', 1072.1101694915253],
+              ['KR-50', 754.8537634408602],
+              ['KR-41', 1315.3332351786416],
+              ['KR-42', 91.62324696933682],
+              ['KR-43', 215.8615010799136],
+              ['KR-44', 257.66763883825496],
+              ['KR-45', 223.81174866774074],
+              ['KR-46', 149.9254698639015],
+              ['KR-47', 138.69400514895182],
+              ['KR-48', 317.15664136622394],
+              ['KR-49', 364.11135135135135],
+            ]);
+            var options = {
+              backgroundColor: {fill:'#FFFFFF',stroke:'#FFFFFF' ,strokeWidth:0 },
+              colorAxis:  {minValue: 90, maxValue: 16000, colors: ['rgb(1,155,200)']},
+              legend: 'none',
+              backgroundColor: {fill:'#FFFFFF',stroke:'#FFFFFF' ,strokeWidth:0 },
+              datalessRegionColor: '#f5f5f5',
+              displayMode: 'regions',
+              enableRegionInteractivity: 'true',
+              resolution: 'provinces',
+              sizeAxis: {minValue: 1, maxValue:1,minSize:10,  maxSize: 10},
+              region:'KR', //country code
+              keepAspectRatio: true, width:600,	height:400,
+              tooltip: {textStyle: {color: '#444444'}, trigger:'focus'}
+            };
+            var chart1 = new google.visualization.GeoChart(document.getElementById('density'));
+            google.visualization.events.addListener(chart1, 'select', function() {
+              var selection = chart1.getSelection();
+              if (selection.length == 1) {
+                var selectedRow = selection[0].row;
+                var selectedRegion = data1.getValue(selectedRow, 0);
+                if(ivalue[selectedRegion] != '') {
+                  document.getElementsByTagName('body')[0].style.background=ivalue[selectedRegion];
+                }
+              }
+            });
+            chart1.draw(data1, options);
+      }
+        </script>
+      </div>
+    <h2>시각화를 위한 인구밀도 로그스케일</h2>
+    <h4>인구밀도가 색으로 잘 드러남을 시각적으로 확인할 수 있다.</h4>
+      <div id='density_log_scaled'>
+
+        <script type='text/javascript'>google.load('visualization', '1', {'packages': ['geochart']});
+        google.setOnLoadCallback(drawVisualization);
+          function drawVisualization() {
+          var data1 = new google.visualization.arrayToDataTable([
+            ['City','Populaion density'],
+            ['KR-11', 2.1123402904876167],
+            ['KR-26', 1.2135759313502703],
+            ['KR-27', 0.8820086013503113],
+            ['KR-28', 0.8884812224234482],
+            ['KR-29', 0.9210344292749311],
+            ['KR-30', 0.8757330091733314],
+            ['KR-31', 0.2275371094605296],
+            ['KR-50', -0.01684150088330717],
+            ['KR-41', 0.36998596227650143],
+            ['KR-42', -1.4806704352225604],
+            ['KR-43', -0.8874716962895864],
+            ['KR-44', -0.7645496498484247],
+            ['KR-45', -0.8623660919809093],
+            ['KR-46', -1.1402207854979975],
+            ['KR-47', -1.1941435623837873],
+            ['KR-48', -0.6202104627074664],
+            ['KR-49', -0.5242223709829046],
+          ]);
+          var options = {
+            backgroundColor: {fill:'#FFFFFF',stroke:'#FFFFFF' ,strokeWidth:0 },
+            colorAxis:  {minValue: -1.4, maxValue: 2.5, colors: ['rgb(1,155,200)']},
+            legend: 'none',
+            backgroundColor: {fill:'#FFFFFF',stroke:'#FFFFFF' ,strokeWidth:0 },
+            datalessRegionColor: '#f5f5f5',
+            displayMode: 'regions',
+            enableRegionInteractivity: 'true',
+            resolution: 'provinces',
+            sizeAxis: {minValue: 1, maxValue:1,minSize:10,  maxSize: 10},
+            region:'KR', //country code
+            keepAspectRatio: true, width:600,	height:400,
+            tooltip: {textStyle: {color: '#444444'}, trigger:'focus'}
+          };
+
+          var chart1 = new google.visualization.GeoChart(document.getElementById('density_log_scaled'));
+          google.visualization.events.addListener(chart1, 'select', function() {
+            var selection = chart1.getSelection();
+            if (selection.length == 1) {
+              var selectedRow = selection[0].row;
+              var selectedRegion = data1.getValue(selectedRow, 0);
+              if(ivalue[selectedRegion] != '') {
+                document.getElementsByTagName('body')[0].style.background=ivalue[selectedRegion];
+              }
+            }
+          });
+          chart1.draw(data1, options);
+        }
+
+         </script>
+      </div>
+    </div>
+    <div style="float:left; margin: 10px;">
+      <h2>지역별 교통사고 사망사건 인명피해자 수</h2>
+      <div id='accident'>
+      <script type='text/javascript'>google.load('visualization', '1', {'packages': ['geochart']});
+    	google.setOnLoadCallback(drawVisualization);
+
+    	function drawVisualization() {
+    		var data1 = new google.visualization.arrayToDataTable([
+    			['City','사고건수'],
+    			['KR-11', 428],
+    			['KR-26', 218],
+    			['KR-27', 274],
+    			['KR-28', 258],
+    			['KR-29', 79],
+    			['KR-30', 133],
+    			['KR-31', 93],
+    			['KR-41', 1511],
+    			['KR-42', 387],
+    			['KR-43', 398],
+    			['KR-44', 580],
+    			['KR-45', 452],
+    			['KR-46', 620],
+    			['KR-47', 744],
+    			['KR-48', 575],
+    			['KR-49', 126],
+    			['KR-50', 17],
+    		]);
+    		var options = {
+    			backgroundColor: {fill:'#FFFFFF',stroke:'#FFFFFF' ,strokeWidth:0 },
+    			colorAxis:  {minValue: 17, maxValue: 1511, colors: ['rgb(1,155,200)']},
+    			backgroundColor: {fill:'#FFFFFF',stroke:'#FFFFFF' ,strokeWidth:0 },
+    			datalessRegionColor: '#f5f5f5',
+    			displayMode: 'regions',
+    			enableRegionInteractivity: 'true',
+    			resolution: 'provinces',
+    			sizeAxis: {minValue: 1, maxValue:1,minSize:10,  maxSize: 10},
+    			region:'KR', //country code
+    			keepAspectRatio: true, width:600,	height:400,
+    			tooltip: {textStyle: {color: '#444444'}, trigger:'focus'}
+    		};
+
+    		var chart1 = new google.visualization.GeoChart(document.getElementById('accident'));
+    		google.visualization.events.addListener(chart1, 'select', function() {
+    		 	var selection = chart1.getSelection();
+    		 	if (selection.length == 1) {
+    		 		var selectedRow = selection[0].row;
+    		 		var selectedRegion = data1.getValue(selectedRow, 0);
+    		 		if(ivalue[selectedRegion] != '') {
+    		 			document.getElementsByTagName('body')[0].style.background=ivalue[selectedRegion];
+    		 		}
+    		 	}
+    		});
+    		chart1.draw(data1, options);
+    	}
+
+    </script>
+      </div>
+      <h2>인구밀도를 고려한 상대적 인명피해수</h2>
+      <h4>인구밀도와 반비례함을 시각적으로 확인할 수 있다.</h4>
+      <div id='relative_accident'>
+      <script type='text/javascript'>google.load('visualization', '1', {'packages': ['geochart']});
+      google.setOnLoadCallback(drawVisualization);
+      function drawVisualization() {
+        var data1 = new google.visualization.arrayToDataTable([
+          ['City','인구밀도비례 교통사고'],
+          ['KR-11', 0.026724713672259894],
+          ['KR-26', 0.049405491762121355],
+          ['KR-27', 0.09991704380590313],
+          ['KR-28', 0.0932128760706579],
+          ['KR-29', 0.02723961695643616],
+          ['KR-30', 0.0489385072869451],
+          ['KR-31', 0.08674481657431488],
+          ['KR-50', 0.022520918386243007],
+          ['KR-41', 1.1487583219128374],
+          ['KR-42', 4.223818875678088],
+          ['KR-43', 1.8437748186169487],
+          ['KR-44', 2.25096175295836],
+          ['KR-45', 2.0195543919859884],
+          ['KR-46', 4.1353880735729565],
+          ['KR-47', 5.364327024812455],
+          ['KR-48', 1.8129842639367648],
+          ['KR-49', 0.3460479865084337],
+        ]);
+        var options = {
+          backgroundColor: {fill:'#FFFFFF',stroke:'#FFFFFF' ,strokeWidth:0 },
+          colorAxis:  {minValue: 0.02, maxValue: 5.4, colors: ['rgb(1,155,200)']},
+          legend: 'none',
+          backgroundColor: {fill:'#FFFFFF',stroke:'#FFFFFF' ,strokeWidth:0 },
+          datalessRegionColor: '#f5f5f5',
+          displayMode: 'regions',
+          enableRegionInteractivity: 'true',
+          resolution: 'provinces',
+          sizeAxis: {minValue: 1, maxValue:1,minSize:10,  maxSize: 10},
+          region:'KR', //country code
+          keepAspectRatio: true, width:600,	height:400,
+          tooltip: {textStyle: {color: '#444444'}, trigger:'focus'}
+        };
+
+        var chart1 = new google.visualization.GeoChart(document.getElementById('relative_accident'));
+        google.visualization.events.addListener(chart1, 'select', function() {
+          var selection = chart1.getSelection();
+          if (selection.length == 1) {
+            var selectedRow = selection[0].row;
+            var selectedRegion = data1.getValue(selectedRow, 0);
+            if(ivalue[selectedRegion] != '') {
+              document.getElementsByTagName('body')[0].style.background=ivalue[selectedRegion];
+            }
+          }
+        });
+        chart1.draw(data1, options);
+      }
+
+      </script>
+      </div>
+    </div>
+
+  </body>
+</html>

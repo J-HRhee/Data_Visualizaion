@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  </head>
+  <body style="margin: 20px;">
+    <h2>사용데이터</h2>
+    <p> - 도로교통공단_사망 교통사고 정보_20201123.csv (Raw Data)</p><br>
+    <h3>가설1: 신호위반, 중앙선 침범이 사망사고의 주 원인일 것이다.</h3>
+    <div id="piechart" style="width: 900px; height: 500px;">
+      <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ['유형','사고건수'],
+            ['안전운전 의무 불이행', 2171],
+            ['신호위반', 304],
+            ['중앙선 침범', 232],
+            ['과속', 217],
+            ['보행자 보호의무 위반', 116],
+            ['기타', 92],
+            ['안전거리 미확보', 56],
+            ['교차로 통행방법 위반', 45],
+          ]);
+          var options = {title: '사고 유형별 건수'};
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          chart.draw(data, options);
+        }
+      </script>
+    </div>
+        <p>검증: 안전운전 의무 불이행이 가장 큰 원인인 것으로 나타난다.</p>
+        <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          -가설과 다른 결과가 나타남</p>
+        <br><br><br>
+
+        <h3>가설2: 주말에 사망사고가 더 많을 것이다.</h3>
+    <div id = 'day' style = "width: 500px; height: 700px;">
+    <script language = "JavaScript">
+       function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ['요일','사고건수'],
+            ['월', 507],
+            ['화', 464],
+            ['수', 482],
+            ['목', 482],
+            ['금', 517],
+            ['토', 429],
+            ['일', 352],
+
+          ]);
+          var options = {title: '요일별교통사고통계'};
+          // Instantiate and draw the chart.
+          var chart = new google.visualization.BarChart(document.getElementById('day'));
+          chart.draw(data, options);
+       }
+       google.charts.setOnLoadCallback(drawChart);
+    </script>
+    </div>
+    <p>검증: 주말보다 오히려 주중에 사망사고가 더 많이 발생함</p>
+    <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      -가설과 다른 결과가 나타남</p>
+    <br><br><br>
+    <h3>가설3: 눈이 내리는 겨울과 비가 많이 오는 여름에 사망사고가 더 빈번하게 일어날 것이다.</h3>
+    <div id = 'month' style = "width: 500px; height: 700px;">
+    <script language = "JavaScript">
+       function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ['요일','사고건수'],
+            ['3월', 247],
+            ['4월', 280],
+            ['5월', 297],
+            ['6월', 268],
+            ['7월', 230],
+            ['8월', 241],
+            ['9월', 279],
+            ['10월', 320],
+            ['11월', 286],
+            ['12월', 298],
+            ['01월', 288],
+            ['02월', 199],
+
+          ]);
+          var options = {title: '월별교통사고통계'};
+          // Instantiate and draw the chart.
+          var chart = new google.visualization.BarChart(document.getElementById('month'));
+          chart.draw(data, options);
+       }
+       google.charts.setOnLoadCallback(drawChart);
+    </script>
+    </div>
+    <p>검증: 봄, 가을에 사망사고가 더 많이 발생함</p>
+    <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      -가설과 다른 결과가 나타남</p>
+  </body>
+</html>
